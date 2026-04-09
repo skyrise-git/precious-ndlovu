@@ -3,6 +3,16 @@ import { DM_Sans, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { site } from "@/content/site";
 
+function metadataBaseUrl(): URL {
+  const raw = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  if (!raw) return new URL("https://localhost");
+  try {
+    return new URL(raw);
+  } catch {
+    return new URL("https://localhost");
+  }
+}
+
 const display = Playfair_Display({
   variable: "--font-display",
   subsets: ["latin"],
@@ -21,7 +31,7 @@ export const metadata: Metadata = {
     template: `%s · ${site.fullName}`,
   },
   description: site.heroLead,
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
+  metadataBase: metadataBaseUrl(),
   openGraph: {
     title: site.fullName,
     description: site.heroLead,
