@@ -2,12 +2,11 @@ generator client {
   provider = "prisma-client-js"
 }
 
-// Supabase: use the pooled URL for DATABASE_URL (port 6543, PgBouncer) in production.
-// Use DIRECT_URL (direct Postgres, port 5432) for migrations — see .env.example.
+// Supabase: set DATABASE_URL to your Postgres URI (Settings → Database → URI).
+// Use the direct connection (port 5432) unless you know you need the pooler + split URLs.
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model SiteImage {
