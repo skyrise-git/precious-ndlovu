@@ -3,40 +3,47 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #1a1a1a;
-  --muted: #6b7280;
-  --accent: #dc2626;
-  --accent-hover: #b91c1c;
-  --accent-secondary: #d4a017;
-  --accent-soft: #fef2f2;
+  --background: #f7f3ef;
+  --foreground: #1f1b20;
+  --muted: #6b6670;
+  --accent: #9f1f2f;
+  --accent-hover: #7e1825;
+  --accent-secondary: #c9a45d;
+  --accent-soft: #f5e8ea;
   --card: #ffffff;
-  --border: #e5e7eb;
-  --hero-gradient-start: #dc2626;
-  --hero-gradient-mid: #991b1b;
-  --hero-gradient-end: #7f1d1d;
+  --border: #e6dfe3;
+  --hero-gradient-start: #2f1a24;
+  --hero-gradient-mid: #531c2d;
+  --hero-gradient-end: #7c2538;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0f0f0f;
+    --background: #121014;
     --foreground: #fafafa;
-    --muted: #9ca3af;
-    --accent: #ef4444;
-    --accent-hover: #dc2626;
-    --accent-secondary: #fbbf24;
-    --accent-soft: #1c1917;
-    --card: #1a1a1a;
-    --border: #374151;
-    --hero-gradient-start: #991b1b;
-    --hero-gradient-mid: #7f1d1d;
-    --hero-gradient-end: #450a0a;
+    --muted: #a7a0aa;
+    --accent: #da4e5f;
+    --accent-hover: #c53b4d;
+    --accent-secondary: #e1c98a;
+    --accent-soft: #281f24;
+    --card: #1d171b;
+    --border: #3c2f35;
+    --hero-gradient-start: #1d1318;
+    --hero-gradient-mid: #351722;
+    --hero-gradient-end: #591f31;
   }
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
+  scroll-behavior: smooth;
+}
+
+a,
+button {
+  transition-duration: 220ms;
+  transition-timing-function: ease;
 }
 
 .prose-compact p {
@@ -57,12 +64,21 @@ body {
 .animate-fade-up-delay-1 { animation: fade-up 0.6s 0.1s ease-out both; }
 .animate-fade-up-delay-2 { animation: fade-up 0.6s 0.2s ease-out both; }
 .animate-fade-up-delay-3 { animation: fade-up 0.6s 0.3s ease-out both; }
+.animate-float { animation: float 8s ease-in-out infinite; }
+.hover-lift { transition: transform 240ms ease, box-shadow 240ms ease; }
+.hover-lift:hover { transform: translateY(-4px); }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
 
 @media (prefers-reduced-motion: reduce) {
   .animate-fade-up,
   .animate-fade-up-delay-1,
   .animate-fade-up-delay-2,
-  .animate-fade-up-delay-3 {
+  .animate-fade-up-delay-3,
+  .animate-float {
     animation: none;
     opacity: 1;
     transform: none;

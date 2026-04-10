@@ -21,112 +21,88 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Accordion } from "@/components/ui/Accordion";
 
-function TableShell({
-  caption,
-  children,
-}: {
-  caption: string;
-  children: React.ReactNode;
-}) {
+function TableShell({ caption, children }: { caption: string; children: React.ReactNode }) {
   return (
-    <div className="overflow-x-auto rounded-xl border border-gray-200/80 bg-card shadow-sm dark:border-gray-700">
+    <div className="overflow-x-auto rounded-xl border border-[#eadfe4] bg-white shadow-sm">
       <table className="w-full min-w-[520px] border-collapse text-left text-sm">
-        <caption className="border-b border-gray-200/60 bg-gray-50/80 px-4 py-3 text-left text-sm font-semibold text-gray-800 dark:border-gray-700 dark:bg-gray-900/50 dark:text-gray-200">
+        <caption className="border-b border-[#eee4e8] bg-[#fdf7f8] px-4 py-3 text-left font-semibold text-gray-800">
           {caption}
         </caption>
-        <tbody className="divide-y divide-gray-200/60 dark:divide-gray-700">{children}</tbody>
+        <tbody className="divide-y divide-[#eee4e8]">{children}</tbody>
       </table>
-    </div>
-  );
-}
-
-function SummaryCards() {
-  const cards = [
-    { label: "Sponsor Bonus", value: "20%–35%", detail: "Earned per enrolment" },
-    { label: "Group Incentive", value: "Up to 10 levels", detail: "On repeat purchases" },
-    { label: "Lifestyle Funds", value: "$350–$2,400", detail: "Travel, Car, House" },
-  ];
-  return (
-    <div className="mb-10 grid gap-4 sm:grid-cols-3">
-      {cards.map((c) => (
-        <div
-          key={c.label}
-          className="rounded-xl border border-red-200/60 bg-gradient-to-br from-red-50/80 to-white p-5 dark:border-red-800/30 dark:from-red-950/30 dark:to-card"
-        >
-          <p className="text-sm font-semibold text-gray-500 dark:text-gray-400">{c.label}</p>
-          <p className="mt-1 font-display text-2xl font-bold text-red-800 dark:text-red-300">{c.value}</p>
-          <p className="mt-1 text-xs text-gray-500">{c.detail}</p>
-        </div>
-      ))}
     </div>
   );
 }
 
 export function Compensation() {
   return (
-    <section id="compensation" className="scroll-mt-20 border-t border-gray-200/60 bg-gray-50/50 py-20 dark:border-gray-800 dark:bg-gray-900/20">
+    <section id="compensation" className="scroll-mt-20 border-t border-[#eadfe4] bg-[#fcf8f6] py-20">
       <Container>
         <SectionHeading
           eyebrow="Education"
           title="How the plan pays"
-          subtitle="A summary view first — expand any section for full details. Always verify with official Revoobit materials."
+          subtitle="A summary view first. Expand each section for details and verify with official Revoobit materials."
         />
-
-        <SummaryCards />
-
-        <div className="mb-10">
+        <div className="mb-8 grid gap-4 sm:grid-cols-3">
+          {[
+            ["Sponsor Bonus", "20%–35%"],
+            ["Group Incentive", "Up to 10 Levels"],
+            ["Lifestyle Funds", "$350–$2,400"],
+          ].map(([label, value]) => (
+            <div key={label} className="rounded-xl border border-[#eadfe4] bg-white p-4">
+              <p className="text-sm text-gray-500">{label}</p>
+              <p className="font-display text-2xl font-bold text-[var(--accent)]">{value}</p>
+            </div>
+          ))}
+        </div>
+        <div className="mb-8">
           <CompensationDisclaimer />
         </div>
-
         <div className="space-y-4">
           <Accordion title="1. Sponsor Bonus (20%–35%)" defaultOpen>
-            <p className="mb-4 text-gray-600 dark:text-gray-400">
-              Earned in real-time when you enroll a new member. Your percentage depends on your package;
-              RV earned depends on what the new member purchases.
-            </p>
-            <TableShell caption="Sponsor Bonus rate by your package">
+            <p className="mb-4 text-gray-600">{sponsorBonusExample}</p>
+            <TableShell caption="Sponsor bonus by package">
               <>
-                <tr className="bg-gray-50/80 dark:bg-gray-900/30">
-                  <th scope="col" className="px-4 py-3 font-semibold">Your package</th>
-                  <th scope="col" className="px-4 py-3 font-semibold">Sponsor Bonus %</th>
+                <tr className="bg-[#fdf7f8]">
+                  <th className="px-4 py-3">Package</th>
+                  <th className="px-4 py-3">Bonus</th>
                 </tr>
                 {sponsorBonusByPackage.map((row) => (
                   <tr key={row.package}>
-                    <td className="px-4 py-3 text-gray-700 dark:text-gray-300">{row.package}</td>
-                    <td className="px-4 py-3 font-semibold text-red-700 dark:text-red-300">{row.percent}%</td>
+                    <td className="px-4 py-2">{row.package}</td>
+                    <td className="px-4 py-2 font-semibold text-[var(--accent)]">{row.percent}%</td>
                   </tr>
                 ))}
               </>
             </TableShell>
-            <p className="mt-3 text-sm text-gray-500 dark:text-gray-400">{sponsorBonusExample}</p>
           </Accordion>
 
-          <Accordion title="2. Development Bonus (Team — 10%)">
-            <p className="mb-4 text-gray-600 dark:text-gray-400">{developmentNote}</p>
-            <TableShell caption="Development Bonus caps (summary)">
+          <Accordion title="2. Development Bonus">
+            <p className="mb-4 text-gray-600">{developmentNote}</p>
+            <TableShell caption="Development caps">
               <>
-                <tr className="bg-gray-50/80 dark:bg-gray-900/30">
-                  <th scope="col" className="px-4 py-3 font-semibold">Package</th>
-                  <th scope="col" className="px-4 py-3 font-semibold">Limit (summary)</th>
+                <tr className="bg-[#fdf7f8]">
+                  <th className="px-4 py-3">Package</th>
+                  <th className="px-4 py-3">Limit</th>
                 </tr>
                 {developmentBonusCaps.map((row) => (
                   <tr key={row.package}>
-                    <td className="px-4 py-3">{row.package}</td>
-                    <td className="px-4 py-3">{row.detail}</td>
+                    <td className="px-4 py-2">{row.package}</td>
+                    <td className="px-4 py-2">{row.detail}</td>
                   </tr>
                 ))}
               </>
             </TableShell>
           </Accordion>
 
-          <Accordion title="3. Group Incentive (Unilevel)">
-            <p className="mb-4 text-gray-600 dark:text-gray-400">{groupIncentiveQualification}</p>
+          <Accordion title="3. Group Incentive">
+            <p className="mb-4 text-gray-600">{groupIncentiveQualification}</p>
             <div className="grid gap-6 lg:grid-cols-2">
-              <TableShell caption="Percent by level (levels 1–10)">
+              <TableShell caption="Percent by level">
                 <>
-                  <tr className="bg-gray-50/80 dark:bg-gray-900/30">
-                    <th className="px-4 py-3 font-semibold">Level</th>
-                    <th className="px-4 py-3 font-semibold">%</th>
+                  <tr className="bg-[#fdf7f8]">
+                    <th className="px-4 py-3">Level</th>
+                    <th className="px-4 py-3">%</th>
                   </tr>
                   {groupIncentiveLevels.map((row) => (
                     <tr key={row.level}>
@@ -138,9 +114,9 @@ export function Compensation() {
               </TableShell>
               <TableShell caption="Levels unlocked by package">
                 <>
-                  <tr className="bg-gray-50/80 dark:bg-gray-900/30">
-                    <th className="px-4 py-3 font-semibold">Package</th>
-                    <th className="px-4 py-3 font-semibold">Levels unlocked</th>
+                  <tr className="bg-[#fdf7f8]">
+                    <th className="px-4 py-3">Package</th>
+                    <th className="px-4 py-3">Levels</th>
                   </tr>
                   {groupIncentiveUnlocks.map((row) => (
                     <tr key={row.package}>
@@ -154,16 +130,16 @@ export function Compensation() {
           </Accordion>
 
           <Accordion title="4. Bonus Roll-up (Gold only)">
-            <p className="text-gray-600 dark:text-gray-400">{rollUpSummary}</p>
+            <p className="text-gray-600">{rollUpSummary}</p>
           </Accordion>
 
-          <Accordion title={`5. Bonus Unilevel (Repurchase — ${unilevelRepurchaseTotal})`}>
-            <p className="mb-4 text-gray-600 dark:text-gray-400">{unilevelRepurchaseQualification}</p>
-            <TableShell caption="Unilevel repurchase split (summary)">
+          <Accordion title={`5. Bonus Unilevel (${unilevelRepurchaseTotal})`}>
+            <p className="mb-4 text-gray-600">{unilevelRepurchaseQualification}</p>
+            <TableShell caption="Unilevel repurchase">
               <>
-                <tr className="bg-gray-50/80 dark:bg-gray-900/30">
-                  <th className="px-4 py-3 font-semibold">Levels</th>
-                  <th className="px-4 py-3 font-semibold">Income (summary)</th>
+                <tr className="bg-[#fdf7f8]">
+                  <th className="px-4 py-3">Levels</th>
+                  <th className="px-4 py-3">Income</th>
                 </tr>
                 {unilevelRepurchaseLevels.map((row) => (
                   <tr key={row.label}>
@@ -175,32 +151,26 @@ export function Compensation() {
             </TableShell>
           </Accordion>
 
-          <Accordion title="6. Upgrade cost differentials">
-            <p className="mb-4 text-gray-600 dark:text-gray-400">
-              If you start lower and upgrade later, you typically pay the difference (verify with official rules).
-            </p>
-            <div className="overflow-x-auto rounded-xl border border-gray-200/80 bg-card dark:border-gray-700">
-              <table className="w-full min-w-[640px] border-collapse text-left text-sm">
-                <caption className="border-b border-gray-200/60 bg-gray-50/80 px-4 py-3 text-left font-semibold dark:border-gray-700 dark:bg-gray-900/50">
-                  Upgrade differentials (RV)
-                </caption>
+          <Accordion title="6. Upgrade Cost Differentials">
+            <div className="overflow-x-auto rounded-xl border border-[#eadfe4] bg-white">
+              <table className="w-full min-w-[640px] text-left text-sm">
                 <thead>
-                  <tr className="bg-gray-50/80 text-xs uppercase tracking-wide dark:bg-gray-900/30">
-                    <th scope="col" className="px-3 py-3">Starting package</th>
-                    <th scope="col" className="px-3 py-3">→ Starter</th>
-                    <th scope="col" className="px-3 py-3">→ Bronze</th>
-                    <th scope="col" className="px-3 py-3">→ Silver</th>
-                    <th scope="col" className="px-3 py-3">→ Gold</th>
+                  <tr className="bg-[#fdf7f8]">
+                    <th className="px-3 py-3">Starting Package</th>
+                    <th className="px-3 py-3">→ Starter</th>
+                    <th className="px-3 py-3">→ Bronze</th>
+                    <th className="px-3 py-3">→ Silver</th>
+                    <th className="px-3 py-3">→ Gold</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-200/60 dark:divide-gray-700">
+                <tbody className="divide-y divide-[#eee4e8]">
                   {upgradeDifferentials.map((row) => (
                     <tr key={row.from}>
-                      <td className="px-3 py-3 font-medium">{row.from}</td>
-                      <td className="px-3 py-3">{row.toStarter ?? "—"}</td>
-                      <td className="px-3 py-3">{row.toBronze ?? "—"}</td>
-                      <td className="px-3 py-3">{row.toSilver ?? "—"}</td>
-                      <td className="px-3 py-3">{row.toGold ?? "—"}</td>
+                      <td className="px-3 py-2">{row.from}</td>
+                      <td className="px-3 py-2">{row.toStarter ?? "—"}</td>
+                      <td className="px-3 py-2">{row.toBronze ?? "—"}</td>
+                      <td className="px-3 py-2">{row.toSilver ?? "—"}</td>
+                      <td className="px-3 py-2">{row.toGold ?? "—"}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -208,35 +178,35 @@ export function Compensation() {
             </div>
           </Accordion>
 
-          <Accordion title="7. Lifestyle funds (binary-based)">
-            <p className="mb-4 text-sm text-gray-600 dark:text-gray-400">{lifestyleQualification}</p>
-            <TableShell caption="Lifestyle funds (summary)">
+          <Accordion title="7. Lifestyle Funds">
+            <p className="mb-4 text-gray-600">{lifestyleQualification}</p>
+            <TableShell caption="Lifestyle funds summary">
               <>
-                <tr className="bg-gray-50/80 dark:bg-gray-900/30">
-                  <th className="px-4 py-3 font-semibold">Fund</th>
-                  <th className="px-4 py-3 font-semibold">Requirement (summary)</th>
-                  <th className="px-4 py-3 font-semibold">Reward (summary)</th>
+                <tr className="bg-[#fdf7f8]">
+                  <th className="px-4 py-3">Fund</th>
+                  <th className="px-4 py-3">Requirement</th>
+                  <th className="px-4 py-3">Reward</th>
                 </tr>
                 {lifestyleFunds.map((row) => (
                   <tr key={row.name}>
-                    <td className="px-4 py-3">{row.name}</td>
-                    <td className="px-4 py-3">{row.requirement}</td>
-                    <td className="px-4 py-3 font-semibold text-red-700 dark:text-red-300">{row.reward}</td>
+                    <td className="px-4 py-2">{row.name}</td>
+                    <td className="px-4 py-2">{row.requirement}</td>
+                    <td className="px-4 py-2 font-semibold text-[var(--accent)]">{row.reward}</td>
                   </tr>
                 ))}
               </>
             </TableShell>
           </Accordion>
 
-          <Accordion title="8. Rank incentive (milestones)">
-            <p className="mb-4 text-sm text-gray-600 dark:text-gray-400">{rankNotes}</p>
-            <TableShell caption="Rank incentive (summary)">
+          <Accordion title="8. Rank Incentive">
+            <p className="mb-4 text-gray-600">{rankNotes}</p>
+            <TableShell caption="Rank milestones">
               <>
-                <tr className="bg-gray-50/80 dark:bg-gray-900/30">
-                  <th className="px-4 py-3 font-semibold">Rank</th>
-                  <th className="px-4 py-3 font-semibold">Income target</th>
-                  <th className="px-4 py-3 font-semibold">Reward</th>
-                  <th className="px-4 py-3 font-semibold">Window</th>
+                <tr className="bg-[#fdf7f8]">
+                  <th className="px-4 py-3">Rank</th>
+                  <th className="px-4 py-3">Income Target</th>
+                  <th className="px-4 py-3">Reward</th>
+                  <th className="px-4 py-3">Window</th>
                 </tr>
                 {rankIncentives.map((row) => (
                   <tr key={row.rank}>

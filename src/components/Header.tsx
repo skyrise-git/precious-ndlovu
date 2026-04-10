@@ -4,7 +4,7 @@ import { Container } from "@/components/ui/Container";
 
 const links = [
   { href: "#about", label: "About" },
-  { href: "#pillars", label: "My Business" },
+  { href: "#pillars", label: "Business" },
   { href: "#packages", label: "Packages" },
   { href: "#events", label: "Events" },
   { href: "#contact", label: "Contact" },
@@ -12,9 +12,12 @@ const links = [
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-50 border-b border-gray-200/60 bg-white/95 backdrop-blur-md dark:border-gray-700 dark:bg-gray-950/95">
+    <header className="sticky top-0 z-50 border-b border-[#e5dde2] bg-white/90 backdrop-blur-xl dark:border-gray-700 dark:bg-gray-950/85">
       <Container className="flex h-16 items-center justify-between gap-4">
-        <Link href="/" className="font-display text-xl font-black uppercase tracking-tight text-red-700 dark:text-red-500">
+        <Link
+          href="/"
+          className="font-display text-lg font-black uppercase tracking-tight text-[var(--accent)] sm:text-xl"
+        >
           {site.fullName}
         </Link>
         <nav className="hidden items-center gap-5 text-sm font-semibold uppercase tracking-wide text-gray-700 md:flex dark:text-gray-300">
@@ -22,7 +25,7 @@ export function Header() {
             <a
               key={l.href}
               href={l.href}
-              className="transition hover:text-red-600 dark:hover:text-red-400"
+              className="border-b border-transparent pb-1 transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
             >
               {l.label}
             </a>
@@ -30,9 +33,9 @@ export function Header() {
         </nav>
         <a
           href="#contact"
-          className="rounded-md bg-red-600 px-5 py-2.5 text-sm font-bold uppercase text-white shadow-sm transition hover:bg-red-700"
+          className="rounded-full bg-[var(--accent)] px-5 py-2 text-sm font-bold uppercase tracking-wider text-white shadow-lg shadow-[#9f1f2f]/20 transition hover:bg-[var(--accent-hover)]"
         >
-          Partner now
+          Start now
         </a>
       </Container>
     </header>

@@ -3,27 +3,27 @@ import { Container } from "@/components/ui/Container";
 
 export function Footer() {
   return (
-    <footer className="bg-gray-900 py-12 text-gray-400">
+    <footer className="bg-[#1c1217] py-12 text-gray-300">
       <Container>
         <div className="grid gap-8 sm:grid-cols-3">
           <div>
             <h3 className="font-display text-lg font-bold uppercase text-white">{site.fullName}</h3>
-            <p className="mt-2 text-sm">{site.taglineShort}</p>
+            <p className="mt-2 text-sm text-gray-400">{site.taglineShort}</p>
           </div>
           <div>
-            <h4 className="font-bold uppercase text-white">Quick links</h4>
+            <h4 className="text-sm font-bold uppercase tracking-wide text-white">Quick links</h4>
             <ul className="mt-2 space-y-1 text-sm">
-              {["About", "Packages", "Events", "Contact"].map((l) => (
-                <li key={l}>
-                  <a href={`#${l.toLowerCase()}`} className="transition hover:text-red-400">
-                    {l}
+              {["about", "packages", "events", "contact"].map((link) => (
+                <li key={link}>
+                  <a href={`#${link}`} className="capitalize transition hover:text-[var(--accent-secondary)]">
+                    {link}
                   </a>
                 </li>
               ))}
             </ul>
           </div>
           <div>
-            <h4 className="font-bold uppercase text-white">Follow Precious</h4>
+            <h4 className="text-sm font-bold uppercase tracking-wide text-white">Follow Precious</h4>
             <div className="mt-3 flex gap-3">
               {Object.entries(site.socialLinks).map(([name, url]) => (
                 <a
@@ -31,7 +31,7 @@ export function Footer() {
                   href={url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex h-9 w-9 items-center justify-center rounded-full bg-red-600 text-xs font-bold text-white transition hover:bg-red-500"
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-white/5 text-xs font-bold text-white transition hover:border-[var(--accent-secondary)] hover:text-[var(--accent-secondary)]"
                   aria-label={name}
                 >
                   {name[0].toUpperCase()}
@@ -40,7 +40,7 @@ export function Footer() {
             </div>
           </div>
         </div>
-        <div className="mt-10 border-t border-gray-800 pt-6 text-center text-xs">
+        <div className="mt-10 border-t border-white/10 pt-6 text-center text-xs text-gray-400">
           <p>© {new Date().getFullYear()} {site.fullName}. All rights reserved.</p>
           <p className="mt-2">{site.disclaimerShort}</p>
         </div>

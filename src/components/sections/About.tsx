@@ -9,7 +9,7 @@ export function About({ imageSrc, imageAlt }: Props) {
     <section id="about" className="scroll-mt-20 py-20">
       <Container>
         <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-          <div className="relative mx-auto aspect-[3/4] w-full max-w-sm overflow-hidden rounded-xl shadow-xl ring-4 ring-red-100 dark:ring-red-900/30">
+          <div className="relative mx-auto aspect-[3/4] w-full max-w-sm overflow-hidden rounded-[1.75rem] border border-[#e9dfe4] bg-white shadow-xl">
             <Image
               src={imageSrc}
               alt={imageAlt}
@@ -19,37 +19,22 @@ export function About({ imageSrc, imageAlt }: Props) {
               unoptimized
             />
           </div>
-          <div>
-            <h2 className="font-display text-3xl font-black uppercase text-gray-900 dark:text-gray-50 sm:text-4xl">
+          <div className="animate-fade-up">
+            <p className="text-sm font-bold uppercase tracking-[0.2em] text-[var(--accent)]">Meet your mentor</p>
+            <h2 className="mt-2 font-display text-3xl font-black uppercase leading-tight text-gray-900 dark:text-gray-50 sm:text-4xl">
               {site.aboutTitle}
             </h2>
-            <p className="mt-2 text-lg font-semibold italic text-red-600 dark:text-red-400">
-              {site.aboutSubtitle}
-            </p>
+            <p className="mt-3 text-base font-semibold text-[#7a4254] sm:text-lg">{site.aboutSubtitle}</p>
             <div className="prose-compact mt-6 space-y-4">
               {site.aboutParagraphs.map((p, i) => (
                 <p key={i}>{p}</p>
               ))}
             </div>
-            <div className="mt-6 flex gap-3">
-              {Object.entries(site.socialLinks).map(([name, url]) => (
-                <a
-                  key={name}
-                  href={url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex h-10 w-10 items-center justify-center rounded-full bg-red-600 text-sm font-bold text-white transition hover:bg-red-700"
-                  aria-label={name}
-                >
-                  {name[0].toUpperCase()}
-                </a>
-              ))}
-            </div>
             <a
               href="#contact"
-              className="mt-6 inline-flex rounded-md bg-red-600 px-6 py-3 text-sm font-bold uppercase tracking-wider text-white transition hover:bg-red-700"
+              className="mt-7 inline-flex rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-bold uppercase tracking-wider text-white transition hover:bg-[var(--accent-hover)]"
             >
-              Partner with Precious
+              Work with Precious
             </a>
           </div>
         </div>
