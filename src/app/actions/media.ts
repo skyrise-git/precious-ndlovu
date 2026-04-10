@@ -1,10 +1,12 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { put } from "@vercel/blob";
+import { UTApi } from "uploadthing/server";
 import { mediaSlots, type MediaSlotId } from "@/content/site";
 import { requireAdmin } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+
+const utapi = new UTApi();
 
 export async function setImageUrl(slotId: MediaSlotId, url: string) {
   await requireAdmin();
@@ -57,32 +59,27 @@ export async function uploadSlotImage(formData: FormData) {
   if (!(slotId in mediaSlots)) {
     return { ok: false as const, message: "Invalid slot." };
   }
-  if (file.size > 4_500_000) {
-    return { ok: false as const, message: "File too large (max ~4.5MB)." };
-  }
-  const token = process.env.BLOB_READ_WRITE_TOKEN;
-  if (!token) {
-    return {
-      ok: false as const,
-      message:
-        "Blob uploads are disabled. Set BLOB_READ_WRITE_TOKEN or paste an HTTPS image URL.",
-    };
+  if (file.size > 4_000_000) {
+    return { ok: false as const, message: "File too large (max 4 MB)." };
   }
   const ext = file.name.split(".").pop()?.toLowerCase() ?? "";
   if (!["jpg", "jpeg", "png", "webp", "gif"].includes(ext)) {
     return { ok: false as const, message: "Use jpg, png, webp, or gif." };
   }
-  const path = `site/${slotId}/${Date.now()}.${ext}`;
-  const blob = await put(path, file, {
-    access: "public",
-    token,
-  });
+
+  const response = await utapi.uploadFiles(file);
+  if (response.error) {
+    console.error("[uploadSlotImage] UploadThing error:", response.error);
+    return { ok: false as const, message: "Upload failed. Try again or paste a URL instead." };
+  }
+
+  const url = response.data.ufsUrl;
   await prisma.siteImage.upsert({
     where: { slotId },
-    create: { slotId, url: blob.url },
-    update: { url: blob.url },
+    create: { slotId, url },
+    update: { url },
   });
   revalidatePath("/");
   revalidatePath("/admin");
-  return { ok: true as const, url: blob.url };
+  return { ok: true as const, url };
 }

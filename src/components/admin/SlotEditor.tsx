@@ -56,7 +56,7 @@ export function SlotEditor({ slotId, currentUrl }: Props) {
       >
         <input type="hidden" name="slotId" value={slotId} />
         <label className="block text-sm font-medium text-stone-700 dark:text-stone-300">
-          Upload file (requires <code className="text-xs">BLOB_READ_WRITE_TOKEN</code> on Vercel)
+          Upload file (via UploadThing)
         </label>
         <input
           type="file"
