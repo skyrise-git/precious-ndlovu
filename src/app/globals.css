@@ -3,28 +3,34 @@
 @tailwind utilities;
 
 :root {
-  --background: #faf8f5;
-  --foreground: #1c1917;
-  --muted: #57534e;
-  --accent: #b45309;
-  --accent-hover: #92400e;
-  --accent-secondary: #7c3aed;
-  --accent-soft: #fff7ed;
+  --background: #ffffff;
+  --foreground: #1a1a1a;
+  --muted: #6b7280;
+  --accent: #dc2626;
+  --accent-hover: #b91c1c;
+  --accent-secondary: #d4a017;
+  --accent-soft: #fef2f2;
   --card: #ffffff;
-  --border: #e7e5e4;
+  --border: #e5e7eb;
+  --hero-gradient-start: #dc2626;
+  --hero-gradient-mid: #991b1b;
+  --hero-gradient-end: #7f1d1d;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0c0a09;
-    --foreground: #fafaf9;
-    --muted: #a8a29e;
-    --accent: #f59e0b;
-    --accent-hover: #d97706;
-    --accent-secondary: #a78bfa;
-    --accent-soft: #292524;
-    --card: #1c1917;
-    --border: #44403c;
+    --background: #0f0f0f;
+    --foreground: #fafafa;
+    --muted: #9ca3af;
+    --accent: #ef4444;
+    --accent-hover: #dc2626;
+    --accent-secondary: #fbbf24;
+    --accent-soft: #1c1917;
+    --card: #1a1a1a;
+    --border: #374151;
+    --hero-gradient-start: #991b1b;
+    --hero-gradient-mid: #7f1d1d;
+    --hero-gradient-end: #450a0a;
   }
 }
 
@@ -34,35 +40,23 @@ body {
 }
 
 .prose-compact p {
-  @apply text-stone-600 dark:text-stone-300 leading-relaxed;
+  @apply text-gray-600 dark:text-gray-300 leading-relaxed;
 }
 
 @keyframes fade-up {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.animate-fade-up {
-  animation: fade-up 0.6s ease-out both;
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
 }
 
-.animate-fade-up-delay-1 {
-  animation: fade-up 0.6s 0.1s ease-out both;
-}
-
-.animate-fade-up-delay-2 {
-  animation: fade-up 0.6s 0.2s ease-out both;
-}
-
-.animate-fade-up-delay-3 {
-  animation: fade-up 0.6s 0.3s ease-out both;
-}
+.animate-fade-up { animation: fade-up 0.6s ease-out both; }
+.animate-fade-up-delay-1 { animation: fade-up 0.6s 0.1s ease-out both; }
+.animate-fade-up-delay-2 { animation: fade-up 0.6s 0.2s ease-out both; }
+.animate-fade-up-delay-3 { animation: fade-up 0.6s 0.3s ease-out both; }
 
 @media (prefers-reduced-motion: reduce) {
   .animate-fade-up,

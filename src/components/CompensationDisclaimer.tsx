@@ -3,10 +3,10 @@ import { site } from "@/content/site";
 export function CompensationDisclaimer() {
   return (
     <aside
-      className="rounded-xl border border-amber-200/60 bg-gradient-to-r from-amber-50/90 to-amber-50/50 p-5 text-sm text-stone-700 dark:border-amber-900/40 dark:from-amber-950/30 dark:to-transparent dark:text-stone-300"
+      className="rounded-xl border border-red-200/60 bg-red-50/80 p-5 text-sm text-gray-700 dark:border-red-900/40 dark:bg-red-950/30 dark:text-gray-300"
       role="note"
     >
-      <p className="font-bold text-amber-900 dark:text-amber-200">
+      <p className="font-black uppercase text-red-700 dark:text-red-400">
         Important — for education only
       </p>
       <p className="mt-2 leading-relaxed">

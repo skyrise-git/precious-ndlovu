@@ -2,34 +2,28 @@ import Image from "next/image";
 import { site } from "@/content/site";
 import { Container } from "@/components/ui/Container";
 
-type Props = {
-  imageSrc: string;
-  imageAlt: string;
-};
+type Props = { imageSrc: string; imageAlt: string };
 
 export function About({ imageSrc, imageAlt }: Props) {
   return (
-    <section id="about" className="scroll-mt-20 bg-accent-soft/50 py-20 dark:bg-stone-900/30">
+    <section id="about" className="scroll-mt-20 py-20">
       <Container>
         <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-lg ring-1 ring-stone-200/60 dark:ring-stone-700">
+          <div className="relative mx-auto aspect-[3/4] w-full max-w-sm overflow-hidden rounded-xl shadow-xl ring-4 ring-red-100 dark:ring-red-900/30">
             <Image
               src={imageSrc}
               alt={imageAlt}
               fill
               className="object-cover transition duration-500 hover:scale-105"
-              sizes="(max-width: 1024px) 100vw, 50vw"
+              sizes="(max-width: 1024px) 80vw, 400px"
               unoptimized
             />
           </div>
           <div>
-            <p className="mb-2 text-sm font-semibold uppercase tracking-widest text-violet-600 dark:text-violet-400">
-              About
-            </p>
-            <h2 className="font-display text-3xl font-bold text-stone-900 dark:text-stone-50">
+            <h2 className="font-display text-3xl font-black uppercase text-gray-900 dark:text-gray-50 sm:text-4xl">
               {site.aboutTitle}
             </h2>
-            <p className="mt-2 text-lg font-medium text-amber-700 dark:text-amber-300">
+            <p className="mt-2 text-lg font-semibold italic text-red-600 dark:text-red-400">
               {site.aboutSubtitle}
             </p>
             <div className="prose-compact mt-6 space-y-4">
@@ -37,16 +31,26 @@ export function About({ imageSrc, imageAlt }: Props) {
                 <p key={i}>{p}</p>
               ))}
             </div>
-            <div className="mt-8 flex flex-wrap gap-3">
-              {["Leadership", "Mentorship", "Community", "Wellness"].map((chip) => (
-                <span
-                  key={chip}
-                  className="rounded-full border border-violet-200 bg-violet-50 px-3 py-1 text-xs font-semibold text-violet-700 dark:border-violet-800/50 dark:bg-violet-950/40 dark:text-violet-300"
+            <div className="mt-6 flex gap-3">
+              {Object.entries(site.socialLinks).map(([name, url]) => (
+                <a
+                  key={name}
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-red-600 text-sm font-bold text-white transition hover:bg-red-700"
+                  aria-label={name}
                 >
-                  {chip}
-                </span>
+                  {name[0].toUpperCase()}
+                </a>
               ))}
             </div>
+            <a
+              href="#contact"
+              className="mt-6 inline-flex rounded-md bg-red-600 px-6 py-3 text-sm font-bold uppercase tracking-wider text-white transition hover:bg-red-700"
+            >
+              Partner with Precious
+            </a>
           </div>
         </div>
       </Container>

@@ -4,25 +4,25 @@ import { Container } from "@/components/ui/Container";
 
 const links = [
   { href: "#about", label: "About" },
-  { href: "#pillars", label: "Partnership" },
+  { href: "#pillars", label: "My Business" },
   { href: "#packages", label: "Packages" },
-  { href: "#compensation", label: "Plan" },
+  { href: "#events", label: "Events" },
   { href: "#contact", label: "Contact" },
 ];
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-50 border-b border-stone-200/60 bg-background/80 backdrop-blur-lg dark:border-stone-700/60">
+    <header className="sticky top-0 z-50 border-b border-gray-200/60 bg-white/95 backdrop-blur-md dark:border-gray-700 dark:bg-gray-950/95">
       <Container className="flex h-16 items-center justify-between gap-4">
-        <Link href="/" className="font-display text-lg font-bold text-stone-900 dark:text-stone-50">
+        <Link href="/" className="font-display text-xl font-black uppercase tracking-tight text-red-700 dark:text-red-500">
           {site.fullName}
         </Link>
-        <nav className="hidden items-center gap-6 text-sm font-medium text-stone-500 md:flex dark:text-stone-400">
+        <nav className="hidden items-center gap-5 text-sm font-semibold uppercase tracking-wide text-gray-700 md:flex dark:text-gray-300">
           {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
-              className="transition hover:text-amber-700 dark:hover:text-amber-400"
+              className="transition hover:text-red-600 dark:hover:text-red-400"
             >
               {l.label}
             </a>
@@ -30,9 +30,9 @@ export function Header() {
         </nav>
         <a
           href="#contact"
-          className="rounded-full bg-amber-600 px-5 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-amber-700 dark:bg-amber-500 dark:hover:bg-amber-600"
+          className="rounded-md bg-red-600 px-5 py-2.5 text-sm font-bold uppercase text-white shadow-sm transition hover:bg-red-700"
         >
-          Start today
+          Partner now
         </a>
       </Container>
     </header>

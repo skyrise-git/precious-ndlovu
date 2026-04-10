@@ -29,12 +29,12 @@ function TableShell({
   children: React.ReactNode;
 }) {
   return (
-    <div className="overflow-x-auto rounded-xl border border-stone-200/80 bg-card shadow-sm dark:border-stone-700">
+    <div className="overflow-x-auto rounded-xl border border-gray-200/80 bg-card shadow-sm dark:border-gray-700">
       <table className="w-full min-w-[520px] border-collapse text-left text-sm">
-        <caption className="border-b border-stone-200/60 bg-stone-50/80 px-4 py-3 text-left text-sm font-semibold text-stone-800 dark:border-stone-700 dark:bg-stone-900/50 dark:text-stone-200">
+        <caption className="border-b border-gray-200/60 bg-gray-50/80 px-4 py-3 text-left text-sm font-semibold text-gray-800 dark:border-gray-700 dark:bg-gray-900/50 dark:text-gray-200">
           {caption}
         </caption>
-        <tbody className="divide-y divide-stone-200/60 dark:divide-stone-700">{children}</tbody>
+        <tbody className="divide-y divide-gray-200/60 dark:divide-gray-700">{children}</tbody>
       </table>
     </div>
   );
@@ -51,11 +51,11 @@ function SummaryCards() {
       {cards.map((c) => (
         <div
           key={c.label}
-          className="rounded-xl border border-amber-200/60 bg-gradient-to-br from-amber-50/80 to-white p-5 dark:border-amber-800/30 dark:from-amber-950/30 dark:to-card"
+          className="rounded-xl border border-red-200/60 bg-gradient-to-br from-red-50/80 to-white p-5 dark:border-red-800/30 dark:from-red-950/30 dark:to-card"
         >
-          <p className="text-sm font-semibold text-stone-500 dark:text-stone-400">{c.label}</p>
-          <p className="mt-1 font-display text-2xl font-bold text-amber-800 dark:text-amber-300">{c.value}</p>
-          <p className="mt-1 text-xs text-stone-500">{c.detail}</p>
+          <p className="text-sm font-semibold text-gray-500 dark:text-gray-400">{c.label}</p>
+          <p className="mt-1 font-display text-2xl font-bold text-red-800 dark:text-red-300">{c.value}</p>
+          <p className="mt-1 text-xs text-gray-500">{c.detail}</p>
         </div>
       ))}
     </div>
@@ -64,7 +64,7 @@ function SummaryCards() {
 
 export function Compensation() {
   return (
-    <section id="compensation" className="scroll-mt-20 border-t border-stone-200/60 bg-accent-soft/30 py-20 dark:border-stone-800 dark:bg-stone-900/20">
+    <section id="compensation" className="scroll-mt-20 border-t border-gray-200/60 bg-gray-50/50 py-20 dark:border-gray-800 dark:bg-gray-900/20">
       <Container>
         <SectionHeading
           eyebrow="Education"
@@ -80,32 +80,32 @@ export function Compensation() {
 
         <div className="space-y-4">
           <Accordion title="1. Sponsor Bonus (20%–35%)" defaultOpen>
-            <p className="mb-4 text-stone-600 dark:text-stone-400">
+            <p className="mb-4 text-gray-600 dark:text-gray-400">
               Earned in real-time when you enroll a new member. Your percentage depends on your package;
               RV earned depends on what the new member purchases.
             </p>
             <TableShell caption="Sponsor Bonus rate by your package">
               <>
-                <tr className="bg-stone-50/80 dark:bg-stone-900/30">
+                <tr className="bg-gray-50/80 dark:bg-gray-900/30">
                   <th scope="col" className="px-4 py-3 font-semibold">Your package</th>
                   <th scope="col" className="px-4 py-3 font-semibold">Sponsor Bonus %</th>
                 </tr>
                 {sponsorBonusByPackage.map((row) => (
                   <tr key={row.package}>
-                    <td className="px-4 py-3 text-stone-700 dark:text-stone-300">{row.package}</td>
-                    <td className="px-4 py-3 font-semibold text-amber-700 dark:text-amber-300">{row.percent}%</td>
+                    <td className="px-4 py-3 text-gray-700 dark:text-gray-300">{row.package}</td>
+                    <td className="px-4 py-3 font-semibold text-red-700 dark:text-red-300">{row.percent}%</td>
                   </tr>
                 ))}
               </>
             </TableShell>
-            <p className="mt-3 text-sm text-stone-500 dark:text-stone-400">{sponsorBonusExample}</p>
+            <p className="mt-3 text-sm text-gray-500 dark:text-gray-400">{sponsorBonusExample}</p>
           </Accordion>
 
           <Accordion title="2. Development Bonus (Team — 10%)">
-            <p className="mb-4 text-stone-600 dark:text-stone-400">{developmentNote}</p>
+            <p className="mb-4 text-gray-600 dark:text-gray-400">{developmentNote}</p>
             <TableShell caption="Development Bonus caps (summary)">
               <>
-                <tr className="bg-stone-50/80 dark:bg-stone-900/30">
+                <tr className="bg-gray-50/80 dark:bg-gray-900/30">
                   <th scope="col" className="px-4 py-3 font-semibold">Package</th>
                   <th scope="col" className="px-4 py-3 font-semibold">Limit (summary)</th>
                 </tr>
@@ -120,11 +120,11 @@ export function Compensation() {
           </Accordion>
 
           <Accordion title="3. Group Incentive (Unilevel)">
-            <p className="mb-4 text-stone-600 dark:text-stone-400">{groupIncentiveQualification}</p>
+            <p className="mb-4 text-gray-600 dark:text-gray-400">{groupIncentiveQualification}</p>
             <div className="grid gap-6 lg:grid-cols-2">
               <TableShell caption="Percent by level (levels 1–10)">
                 <>
-                  <tr className="bg-stone-50/80 dark:bg-stone-900/30">
+                  <tr className="bg-gray-50/80 dark:bg-gray-900/30">
                     <th className="px-4 py-3 font-semibold">Level</th>
                     <th className="px-4 py-3 font-semibold">%</th>
                   </tr>
@@ -138,7 +138,7 @@ export function Compensation() {
               </TableShell>
               <TableShell caption="Levels unlocked by package">
                 <>
-                  <tr className="bg-stone-50/80 dark:bg-stone-900/30">
+                  <tr className="bg-gray-50/80 dark:bg-gray-900/30">
                     <th className="px-4 py-3 font-semibold">Package</th>
                     <th className="px-4 py-3 font-semibold">Levels unlocked</th>
                   </tr>
@@ -154,14 +154,14 @@ export function Compensation() {
           </Accordion>
 
           <Accordion title="4. Bonus Roll-up (Gold only)">
-            <p className="text-stone-600 dark:text-stone-400">{rollUpSummary}</p>
+            <p className="text-gray-600 dark:text-gray-400">{rollUpSummary}</p>
           </Accordion>
 
           <Accordion title={`5. Bonus Unilevel (Repurchase — ${unilevelRepurchaseTotal})`}>
-            <p className="mb-4 text-stone-600 dark:text-stone-400">{unilevelRepurchaseQualification}</p>
+            <p className="mb-4 text-gray-600 dark:text-gray-400">{unilevelRepurchaseQualification}</p>
             <TableShell caption="Unilevel repurchase split (summary)">
               <>
-                <tr className="bg-stone-50/80 dark:bg-stone-900/30">
+                <tr className="bg-gray-50/80 dark:bg-gray-900/30">
                   <th className="px-4 py-3 font-semibold">Levels</th>
                   <th className="px-4 py-3 font-semibold">Income (summary)</th>
                 </tr>
@@ -176,16 +176,16 @@ export function Compensation() {
           </Accordion>
 
           <Accordion title="6. Upgrade cost differentials">
-            <p className="mb-4 text-stone-600 dark:text-stone-400">
+            <p className="mb-4 text-gray-600 dark:text-gray-400">
               If you start lower and upgrade later, you typically pay the difference (verify with official rules).
             </p>
-            <div className="overflow-x-auto rounded-xl border border-stone-200/80 bg-card dark:border-stone-700">
+            <div className="overflow-x-auto rounded-xl border border-gray-200/80 bg-card dark:border-gray-700">
               <table className="w-full min-w-[640px] border-collapse text-left text-sm">
-                <caption className="border-b border-stone-200/60 bg-stone-50/80 px-4 py-3 text-left font-semibold dark:border-stone-700 dark:bg-stone-900/50">
+                <caption className="border-b border-gray-200/60 bg-gray-50/80 px-4 py-3 text-left font-semibold dark:border-gray-700 dark:bg-gray-900/50">
                   Upgrade differentials (RV)
                 </caption>
                 <thead>
-                  <tr className="bg-stone-50/80 text-xs uppercase tracking-wide dark:bg-stone-900/30">
+                  <tr className="bg-gray-50/80 text-xs uppercase tracking-wide dark:bg-gray-900/30">
                     <th scope="col" className="px-3 py-3">Starting package</th>
                     <th scope="col" className="px-3 py-3">→ Starter</th>
                     <th scope="col" className="px-3 py-3">→ Bronze</th>
@@ -193,7 +193,7 @@ export function Compensation() {
                     <th scope="col" className="px-3 py-3">→ Gold</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-stone-200/60 dark:divide-stone-700">
+                <tbody className="divide-y divide-gray-200/60 dark:divide-gray-700">
                   {upgradeDifferentials.map((row) => (
                     <tr key={row.from}>
                       <td className="px-3 py-3 font-medium">{row.from}</td>
@@ -209,10 +209,10 @@ export function Compensation() {
           </Accordion>
 
           <Accordion title="7. Lifestyle funds (binary-based)">
-            <p className="mb-4 text-sm text-stone-600 dark:text-stone-400">{lifestyleQualification}</p>
+            <p className="mb-4 text-sm text-gray-600 dark:text-gray-400">{lifestyleQualification}</p>
             <TableShell caption="Lifestyle funds (summary)">
               <>
-                <tr className="bg-stone-50/80 dark:bg-stone-900/30">
+                <tr className="bg-gray-50/80 dark:bg-gray-900/30">
                   <th className="px-4 py-3 font-semibold">Fund</th>
                   <th className="px-4 py-3 font-semibold">Requirement (summary)</th>
                   <th className="px-4 py-3 font-semibold">Reward (summary)</th>
@@ -221,7 +221,7 @@ export function Compensation() {
                   <tr key={row.name}>
                     <td className="px-4 py-3">{row.name}</td>
                     <td className="px-4 py-3">{row.requirement}</td>
-                    <td className="px-4 py-3 font-semibold text-amber-700 dark:text-amber-300">{row.reward}</td>
+                    <td className="px-4 py-3 font-semibold text-red-700 dark:text-red-300">{row.reward}</td>
                   </tr>
                 ))}
               </>
@@ -229,10 +229,10 @@ export function Compensation() {
           </Accordion>
 
           <Accordion title="8. Rank incentive (milestones)">
-            <p className="mb-4 text-sm text-stone-600 dark:text-stone-400">{rankNotes}</p>
+            <p className="mb-4 text-sm text-gray-600 dark:text-gray-400">{rankNotes}</p>
             <TableShell caption="Rank incentive (summary)">
               <>
-                <tr className="bg-stone-50/80 dark:bg-stone-900/30">
+                <tr className="bg-gray-50/80 dark:bg-gray-900/30">
                   <th className="px-4 py-3 font-semibold">Rank</th>
                   <th className="px-4 py-3 font-semibold">Income target</th>
                   <th className="px-4 py-3 font-semibold">Reward</th>
