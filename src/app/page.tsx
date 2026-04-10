@@ -1,5 +1,6 @@
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { MobileCta } from "@/components/MobileCta";
 import { About } from "@/components/sections/About";
 import { Compensation } from "@/components/sections/Compensation";
 import { FinalCta } from "@/components/sections/FinalCta";
@@ -19,7 +20,7 @@ export default async function Home() {
   return (
     <>
       <Header />
-      <main>
+      <main className="pb-16 md:pb-0">
         <Hero imageSrc={media.personHero} imageAlt={mediaSlots.personHero.alt} />
         <About imageSrc={media.personAbout} imageAlt={mediaSlots.personAbout.alt} />
         <QuoteSection />
@@ -30,6 +31,7 @@ export default async function Home() {
         <LeadForm />
       </main>
       <Footer />
+      <MobileCta />
     </>
   );
 }

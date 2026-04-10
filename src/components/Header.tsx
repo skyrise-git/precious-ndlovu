@@ -12,12 +12,12 @@ const links = [
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-50 border-b border-stone-200/80 bg-background/90 backdrop-blur-md dark:border-stone-700/80">
+    <header className="sticky top-0 z-50 border-b border-stone-200/60 bg-background/80 backdrop-blur-lg dark:border-stone-700/60">
       <Container className="flex h-16 items-center justify-between gap-4">
-        <Link href="/" className="font-display text-lg font-semibold text-stone-900 dark:text-stone-50">
+        <Link href="/" className="font-display text-lg font-bold text-stone-900 dark:text-stone-50">
           {site.fullName}
         </Link>
-        <nav className="hidden items-center gap-6 text-sm font-medium text-stone-600 md:flex dark:text-stone-300">
+        <nav className="hidden items-center gap-6 text-sm font-medium text-stone-500 md:flex dark:text-stone-400">
           {links.map((l) => (
             <a
               key={l.href}
@@ -30,9 +30,9 @@ export function Header() {
         </nav>
         <a
           href="#contact"
-          className="rounded-full bg-amber-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-amber-700 dark:bg-amber-500 dark:hover:bg-amber-600"
+          className="rounded-full bg-amber-600 px-5 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-amber-700 dark:bg-amber-500 dark:hover:bg-amber-600"
         >
-          Connect
+          Start today
         </a>
       </Container>
     </header>

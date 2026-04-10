@@ -12,6 +12,9 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
         accent: "var(--accent)",
+        "accent-hover": "var(--accent-hover)",
+        "accent-secondary": "var(--accent-secondary)",
+        "accent-soft": "var(--accent-soft)",
         card: "var(--card)",
       },
       fontFamily: {
