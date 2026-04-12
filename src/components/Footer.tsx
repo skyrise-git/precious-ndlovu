@@ -1,13 +1,7 @@
 import { site } from "@/content/site";
 import { Container } from "@/components/ui/Container";
+import { socialLinks } from "@/components/ui/SocialIcons";
 import type { SiteSettings } from "@/lib/settings";
-
-const socialKeys: { key: keyof SiteSettings; label: string; initial: string }[] = [
-  { key: "facebookUrl", label: "Facebook", initial: "F" },
-  { key: "instagramUrl", label: "Instagram", initial: "I" },
-  { key: "youtubeUrl", label: "YouTube", initial: "Y" },
-  { key: "tiktokUrl", label: "TikTok", initial: "T" },
-];
 
 type Props = { settings: SiteSettings };
 
@@ -35,7 +29,7 @@ export function Footer({ settings }: Props) {
           <div>
             <h4 className="text-sm font-bold uppercase tracking-wide text-white">Follow Precious</h4>
             <div className="mt-3 flex gap-3">
-              {socialKeys.map(({ key, label, initial }) => {
+              {socialLinks.map(({ key, label, Icon }) => {
                 const url = settings[key];
                 if (!url) return null;
                 return (
@@ -44,10 +38,10 @@ export function Footer({ settings }: Props) {
                     href={url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-white/5 text-xs font-bold text-white transition hover:border-[var(--accent-secondary)] hover:text-[var(--accent-secondary)]"
+                    className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-white/5 text-sm text-white transition hover:border-[var(--accent-secondary)] hover:text-[var(--accent-secondary)]"
                     aria-label={label}
                   >
-                    {initial}
+                    <Icon />
                   </a>
                 );
               })}

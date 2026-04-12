@@ -1,14 +1,8 @@
 import { Container } from "@/components/ui/Container";
+import { socialLinks } from "@/components/ui/SocialIcons";
 import type { SiteSettings } from "@/lib/settings";
 
 type Props = { settings: SiteSettings };
-
-const socialIcons: { key: keyof SiteSettings; label: string; initial: string }[] = [
-  { key: "facebookUrl", label: "Facebook", initial: "F" },
-  { key: "instagramUrl", label: "Instagram", initial: "I" },
-  { key: "youtubeUrl", label: "YouTube", initial: "Y" },
-  { key: "tiktokUrl", label: "TikTok", initial: "T" },
-];
 
 export function TopBar({ settings }: Props) {
   return (
@@ -30,7 +24,7 @@ export function TopBar({ settings }: Props) {
               ▶ Video
             </a>
           )}
-          {socialIcons.map(({ key, label, initial }) => {
+          {socialLinks.map(({ key, label, Icon }) => {
             const url = settings[key];
             if (!url) return null;
             return (
@@ -39,10 +33,10 @@ export function TopBar({ settings }: Props) {
                 href={url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="transition hover:text-[var(--accent-secondary)]"
+                className="text-base transition hover:text-[var(--accent-secondary)]"
                 aria-label={label}
               >
-                {initial}
+                <Icon />
               </a>
             );
           })}
