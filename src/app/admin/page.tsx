@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { SlotEditor } from "@/components/admin/SlotEditor";
 import { SettingsEditor } from "@/components/admin/SettingsEditor";
+import { EventsEditor } from "@/components/admin/EventsEditor";
 import type { MediaSlotId } from "@/content/site";
 import { logoutAction } from "@/app/actions/auth";
 import { resolveMediaMap } from "@/lib/media";
 import { getSiteSettings } from "@/lib/settings";
+import { getEvents } from "@/lib/events";
 
 export const dynamic = "force-dynamic";
 
@@ -38,6 +40,7 @@ export default async function AdminPage() {
   }
 
   const settings = await getSiteSettings();
+  const events = await getEvents();
 
   return (
     <div className="min-h-screen bg-stone-100 py-12 dark:bg-stone-950">
@@ -78,6 +81,10 @@ export default async function AdminPage() {
         </div>
 
         <SettingsEditor current={settings} />
+
+        <div className="mt-10">
+          <EventsEditor events={events} />
+        </div>
 
         <h2 className="mt-12 mb-6 font-display text-xl font-semibold text-stone-900 dark:text-stone-50">
           Site Images

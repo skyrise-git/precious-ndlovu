@@ -18,12 +18,14 @@ import { Testimonials } from "@/components/sections/Testimonials";
 import { mediaSlots } from "@/content/site";
 import { resolveMediaMap } from "@/lib/media";
 import { getSiteSettings } from "@/lib/settings";
+import { getEvents } from "@/lib/events";
 
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
   const media = await resolveMediaMap();
   const settings = await getSiteSettings();
+  const events = await getEvents();
 
   return (
     <>
@@ -39,7 +41,7 @@ export default async function Home() {
         <MemberPackages media={media} />
         <Compensation />
         <Testimonials />
-        <Events />
+        <Events events={events} />
         <FinalCta />
         <LeadForm />
       </main>
