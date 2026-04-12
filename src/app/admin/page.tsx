@@ -17,19 +17,36 @@ const slotOrder: MediaSlotId[] = [
 ];
 
 export default async function AdminPage() {
-  const media = await resolveMediaMap();
+  let media: Awaited<ReturnType<typeof resolveMediaMap>>;
+  let dbError = false;
+  try {
+    media = await resolveMediaMap();
+  } catch {
+    const { mediaSlots } = await import("@/content/site");
+    media = Object.fromEntries(
+      Object.entries(mediaSlots).map(([k, v]) => [k, v.defaultSrc]),
+    ) as typeof media;
+    dbError = true;
+  }
 
   return (
     <div className="min-h-screen bg-stone-100 py-12 dark:bg-stone-950">
       <div className="mx-auto max-w-3xl px-4">
+        {dbError && (
+          <div className="mb-6 rounded-lg border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+            <strong>Database unreachable.</strong> Showing stock defaults. Check your{" "}
+            <code className="text-xs">DATABASE_URL</code> in Vercel environment variables and
+            ensure the Supabase database is running.
+          </div>
+        )}
         <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
           <div>
             <h1 className="font-display text-2xl font-semibold text-stone-900 dark:text-stone-50">
               Site images
             </h1>
             <p className="text-sm text-stone-600 dark:text-stone-400">
-              Replace stock photos for the homepage and package cards. You can upload (with Blob
-              token) or paste an HTTPS image URL.
+              Replace stock photos for the homepage and package cards. Upload via UploadThing
+              or paste an HTTPS image URL.
             </p>
           </div>
           <div className="flex gap-3">
