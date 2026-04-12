@@ -23,17 +23,30 @@ const defaults: SiteSettings = {
 
 export const SETTING_KEYS = Object.keys(defaults) as (keyof SiteSettings)[];
 
+async function queryWithRetry<T>(fn: () => Promise<T>, retries = 2): Promise<T> {
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    try {
+      return await fn();
+    } catch (e) {
+      if (attempt === retries) throw e;
+      console.warn(`[DB] retry ${attempt + 1}/${retries}…`);
+      await new Promise((r) => setTimeout(r, 500 * (attempt + 1)));
+    }
+  }
+  throw new Error("unreachable");
+}
+
 export async function getSiteSettings(): Promise<SiteSettings> {
   const result = { ...defaults };
   try {
-    const rows = await prisma.siteSetting.findMany();
+    const rows = await queryWithRetry(() => prisma.siteSetting.findMany());
     for (const row of rows) {
       if (row.key in result) {
         (result as Record<string, string>)[row.key] = row.value;
       }
     }
   } catch (e) {
-    console.error("[getSiteSettings] DB read failed; using defaults.", e);
+    console.error("[getSiteSettings] DB read failed after retries; using defaults.", e);
   }
   return result;
 }
