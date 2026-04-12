@@ -14,28 +14,37 @@ const gallerySlots: MediaSlotId[] = [
 type Props = { media: Record<MediaSlotId, string> };
 
 export function AboutGallery({ media }: Props) {
+  const aspectClasses = [
+    "aspect-[4/5]",
+    "aspect-[4/3]",
+    "aspect-[3/4]",
+    "aspect-[5/4]",
+    "aspect-[3/4]",
+    "aspect-[4/3]",
+  ] as const;
+
   return (
-    <section className="bg-[#fef9f7] py-16">
+    <section id="about-gallery" className="scroll-mt-20 bg-[#fef9f7] py-16">
       <Container>
         <div className="mb-10 text-center">
           <p className="text-sm font-bold uppercase tracking-[0.2em] text-[var(--accent)]">
-            Life &amp; Legacy
+            Life &amp; Journey
           </p>
           <h2 className="mt-2 font-display text-3xl font-black uppercase leading-tight text-gray-900 sm:text-4xl">
-            Family, Achievements &amp; Lifestyle
+            The Foundation Behind the Work
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-base leading-relaxed text-gray-600">
-            A glimpse into the life Precious has built — family, milestones, and the rewards of
-            dedication.
+            A snapshot of life beyond the desk, sharing the people, places, and moments that
+            inspire Precious every day.
           </p>
         </div>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {gallerySlots.map((slotId) => (
+        <div className="columns-1 gap-4 sm:columns-2 lg:columns-3">
+          {gallerySlots.map((slotId, index) => (
             <div
               key={slotId}
-              className="hover-lift group overflow-hidden rounded-2xl border border-[#eadfe4] bg-white shadow-sm"
+              className="hover-lift group mb-4 break-inside-avoid overflow-hidden rounded-2xl border border-[#eadfe4] bg-white shadow-sm"
             >
-              <div className="relative aspect-[4/3] w-full overflow-hidden">
+              <div className={`relative w-full overflow-hidden ${aspectClasses[index]}`}>
                 <Image
                   src={media[slotId]}
                   alt={mediaSlots[slotId].alt}
@@ -45,9 +54,6 @@ export function AboutGallery({ media }: Props) {
                   unoptimized
                 />
               </div>
-              <p className="px-4 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-gray-500">
-                {mediaSlots[slotId].alt}
-              </p>
             </div>
           ))}
         </div>
