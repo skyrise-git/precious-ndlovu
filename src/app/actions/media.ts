@@ -1,12 +1,19 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { UTApi } from "uploadthing/server";
 import { mediaSlots, type MediaSlotId } from "@/content/site";
 import { requireAdmin } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
-const utapi = new UTApi();
+let _utapi: InstanceType<typeof import("uploadthing/server").UTApi> | null = null;
+
+async function getUtApi() {
+  if (!_utapi) {
+    const { UTApi } = await import("uploadthing/server");
+    _utapi = new UTApi();
+  }
+  return _utapi;
+}
 
 export async function setImageUrl(slotId: MediaSlotId, url: string) {
   await requireAdmin();
@@ -67,6 +74,7 @@ export async function uploadSlotImage(formData: FormData) {
     return { ok: false as const, message: "Use jpg, png, webp, or gif." };
   }
 
+  const utapi = await getUtApi();
   const response = await utapi.uploadFiles(file);
   if (response.error) {
     console.error("[uploadSlotImage] UploadThing error:", response.error);
