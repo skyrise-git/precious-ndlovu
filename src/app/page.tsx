@@ -11,7 +11,7 @@ import { Hero } from "@/components/sections/Hero";
 import { LeadForm } from "@/components/sections/LeadForm";
 import { MemberPackages } from "@/components/sections/MemberPackages";
 import { AboutGallery } from "@/components/sections/AboutGallery";
-import { PhotoGallery } from "@/components/sections/PhotoGallery";
+
 import { Pillars } from "@/components/sections/Pillars";
 import { QuoteSection } from "@/components/sections/QuoteSection";
 import { Testimonials } from "@/components/sections/Testimonials";
@@ -38,7 +38,6 @@ export default async function Home() {
         <Pillars />
         <MemberPackages media={media} />
         <Compensation />
-        <PhotoGallery />
         <Testimonials />
         <Events />
         <FinalCta />
