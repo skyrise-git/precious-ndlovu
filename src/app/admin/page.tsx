@@ -9,6 +9,12 @@ export const dynamic = "force-dynamic";
 const slotOrder: MediaSlotId[] = [
   "personHero",
   "personAbout",
+  "aboutGallery1",
+  "aboutGallery2",
+  "aboutGallery3",
+  "aboutGallery4",
+  "aboutGallery5",
+  "aboutGallery6",
   "packageRevookit",
   "packageStarter",
   "packageBronze",

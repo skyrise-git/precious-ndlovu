@@ -100,6 +100,12 @@ export const site = {
 export type MediaSlotId =
   | "personHero"
   | "personAbout"
+  | "aboutGallery1"
+  | "aboutGallery2"
+  | "aboutGallery3"
+  | "aboutGallery4"
+  | "aboutGallery5"
+  | "aboutGallery6"
   | "packageRevookit"
   | "packageStarter"
   | "packageBronze"
@@ -117,6 +123,30 @@ export const mediaSlots: Record<
   personAbout: {
     alt: "Precious Ndlovu — at work",
     defaultSrc: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=1200&q=80",
+  },
+  aboutGallery1: {
+    alt: "Family moments",
+    defaultSrc: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=700&q=80",
+  },
+  aboutGallery2: {
+    alt: "Achievements and milestones",
+    defaultSrc: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=700&q=80",
+  },
+  aboutGallery3: {
+    alt: "Lifestyle and assets",
+    defaultSrc: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=700&q=80",
+  },
+  aboutGallery4: {
+    alt: "Community and leadership",
+    defaultSrc: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=700&q=80",
+  },
+  aboutGallery5: {
+    alt: "Travel and experiences",
+    defaultSrc: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=700&q=80",
+  },
+  aboutGallery6: {
+    alt: "Personal brand moments",
+    defaultSrc: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=700&q=80",
   },
   packageRevookit: {
     alt: "Wellness product — Revookit",

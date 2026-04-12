@@ -10,6 +10,7 @@ import { FinalCta } from "@/components/sections/FinalCta";
 import { Hero } from "@/components/sections/Hero";
 import { LeadForm } from "@/components/sections/LeadForm";
 import { MemberPackages } from "@/components/sections/MemberPackages";
+import { AboutGallery } from "@/components/sections/AboutGallery";
 import { PhotoGallery } from "@/components/sections/PhotoGallery";
 import { Pillars } from "@/components/sections/Pillars";
 import { QuoteSection } from "@/components/sections/QuoteSection";
@@ -30,6 +31,7 @@ export default async function Home() {
         <Hero imageSrc={media.personHero} imageAlt={mediaSlots.personHero.alt} />
         <CtaBanner />
         <About imageSrc={media.personAbout} imageAlt={mediaSlots.personAbout.alt} />
+        <AboutGallery media={media} />
         <QuoteSection />
         <Pillars />
         <MemberPackages media={media} />

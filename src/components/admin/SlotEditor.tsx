@@ -13,6 +13,12 @@ import { mediaSlots, type MediaSlotId } from "@/content/site";
 const labels: Record<MediaSlotId, string> = {
   personHero: "Hero — main portrait",
   personAbout: "About section — portrait",
+  aboutGallery1: "About Gallery — Family moments",
+  aboutGallery2: "About Gallery — Achievements",
+  aboutGallery3: "About Gallery — Lifestyle & assets",
+  aboutGallery4: "About Gallery — Community & leadership",
+  aboutGallery5: "About Gallery — Travel & experiences",
+  aboutGallery6: "About Gallery — Personal brand",
   packageRevookit: "Package REVOOKIT",
   packageStarter: "Package STARTER",
   packageBronze: "Package BRONZE",
