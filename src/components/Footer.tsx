@@ -1,7 +1,17 @@
 import { site } from "@/content/site";
 import { Container } from "@/components/ui/Container";
+import type { SiteSettings } from "@/lib/settings";
 
-export function Footer() {
+const socialKeys: { key: keyof SiteSettings; label: string; initial: string }[] = [
+  { key: "facebookUrl", label: "Facebook", initial: "F" },
+  { key: "instagramUrl", label: "Instagram", initial: "I" },
+  { key: "youtubeUrl", label: "YouTube", initial: "Y" },
+  { key: "tiktokUrl", label: "TikTok", initial: "T" },
+];
+
+type Props = { settings: SiteSettings };
+
+export function Footer({ settings }: Props) {
   return (
     <footer className="bg-[#1c1217] py-12 text-gray-300">
       <Container>
@@ -25,18 +35,22 @@ export function Footer() {
           <div>
             <h4 className="text-sm font-bold uppercase tracking-wide text-white">Follow Precious</h4>
             <div className="mt-3 flex gap-3">
-              {Object.entries(site.socialLinks).map(([name, url]) => (
-                <a
-                  key={name}
-                  href={url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-white/5 text-xs font-bold text-white transition hover:border-[var(--accent-secondary)] hover:text-[var(--accent-secondary)]"
-                  aria-label={name}
-                >
-                  {name[0].toUpperCase()}
-                </a>
-              ))}
+              {socialKeys.map(({ key, label, initial }) => {
+                const url = settings[key];
+                if (!url) return null;
+                return (
+                  <a
+                    key={key}
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-white/5 text-xs font-bold text-white transition hover:border-[var(--accent-secondary)] hover:text-[var(--accent-secondary)]"
+                    aria-label={label}
+                  >
+                    {initial}
+                  </a>
+                );
+              })}
             </div>
           </div>
         </div>

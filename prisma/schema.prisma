@@ -14,3 +14,9 @@ model SiteImage {
   url       String
   updatedAt DateTime @updatedAt
 }
+
+model SiteSetting {
+  key       String   @id
+  value     String
+  updatedAt DateTime @updatedAt
+}

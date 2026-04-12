@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { SlotEditor } from "@/components/admin/SlotEditor";
+import { SettingsEditor } from "@/components/admin/SettingsEditor";
 import type { MediaSlotId } from "@/content/site";
 import { logoutAction } from "@/app/actions/auth";
 import { resolveMediaMap } from "@/lib/media";
+import { getSiteSettings } from "@/lib/settings";
 
 export const dynamic = "force-dynamic";
 
@@ -34,6 +36,8 @@ export default async function AdminPage() {
     ) as typeof media;
     dbError = true;
   }
+
+  const settings = await getSiteSettings();
 
   return (
     <div className="min-h-screen bg-stone-100 py-12 dark:bg-stone-950">
@@ -73,6 +77,11 @@ export default async function AdminPage() {
           </div>
         </div>
 
+        <SettingsEditor current={settings} />
+
+        <h2 className="mt-12 mb-6 font-display text-xl font-semibold text-stone-900 dark:text-stone-50">
+          Site Images
+        </h2>
         <div className="space-y-10">
           {slotOrder.map((slotId) => (
             <SlotEditor key={slotId} slotId={slotId} currentUrl={media[slotId]} />

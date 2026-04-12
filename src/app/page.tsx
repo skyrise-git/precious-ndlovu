@@ -17,15 +17,17 @@ import { QuoteSection } from "@/components/sections/QuoteSection";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { mediaSlots } from "@/content/site";
 import { resolveMediaMap } from "@/lib/media";
+import { getSiteSettings } from "@/lib/settings";
 
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
   const media = await resolveMediaMap();
+  const settings = await getSiteSettings();
 
   return (
     <>
-      <TopBar />
+      <TopBar settings={settings} />
       <Header />
       <main className="pb-16 md:pb-0">
         <Hero imageSrc={media.personHero} imageAlt={mediaSlots.personHero.alt} />
@@ -42,7 +44,7 @@ export default async function Home() {
         <FinalCta />
         <LeadForm />
       </main>
-      <Footer />
+      <Footer settings={settings} />
       <MobileCta />
     </>
   );
