@@ -24,11 +24,16 @@ export async function setImageUrl(slotId: MediaSlotId, url: string) {
   if (!(slotId in mediaSlots)) {
     return { ok: false as const, message: "Invalid slot." };
   }
-  await prisma.siteImage.upsert({
-    where: { slotId },
-    create: { slotId, url: trimmed },
-    update: { url: trimmed },
-  });
+  try {
+    await prisma.siteImage.upsert({
+      where: { slotId },
+      create: { slotId, url: trimmed },
+      update: { url: trimmed },
+    });
+  } catch (err) {
+    console.error("[setImageUrl] DB error:", err);
+    return { ok: false as const, message: "Database error — check DATABASE_URL is set and the SiteImage table exists." };
+  }
   revalidatePath("/");
   revalidatePath("/admin");
   return { ok: true as const };
@@ -39,7 +44,12 @@ export async function resetSlot(slotId: MediaSlotId) {
   if (!(slotId in mediaSlots)) {
     return { ok: false as const, message: "Invalid slot." };
   }
-  await prisma.siteImage.deleteMany({ where: { slotId } });
+  try {
+    await prisma.siteImage.deleteMany({ where: { slotId } });
+  } catch (err) {
+    console.error("[resetSlot] DB error:", err);
+    return { ok: false as const, message: "Database error — check DATABASE_URL is set and the SiteImage table exists." };
+  }
   revalidatePath("/");
   revalidatePath("/admin");
   return { ok: true as const };
@@ -74,20 +84,26 @@ export async function uploadSlotImage(formData: FormData) {
     return { ok: false as const, message: "Use jpg, png, webp, or gif." };
   }
 
-  const utapi = await getUtApi();
-  const response = await utapi.uploadFiles(file);
-  if (response.error) {
-    console.error("[uploadSlotImage] UploadThing error:", response.error);
-    return { ok: false as const, message: "Upload failed. Try again or paste a URL instead." };
-  }
+  try {
+    const utapi = await getUtApi();
+    const response = await utapi.uploadFiles(file);
+    if (response.error) {
+      console.error("[uploadSlotImage] UploadThing error:", response.error);
+      return { ok: false as const, message: "Upload failed: " + String(response.error.message ?? response.error) };
+    }
 
-  const url = response.data.ufsUrl;
-  await prisma.siteImage.upsert({
-    where: { slotId },
-    create: { slotId, url },
-    update: { url },
-  });
-  revalidatePath("/");
-  revalidatePath("/admin");
-  return { ok: true as const, url };
+    const url = response.data.ufsUrl;
+    await prisma.siteImage.upsert({
+      where: { slotId },
+      create: { slotId, url },
+      update: { url },
+    });
+    revalidatePath("/");
+    revalidatePath("/admin");
+    return { ok: true as const, url };
+  } catch (err) {
+    console.error("[uploadSlotImage] unexpected error:", err);
+    const msg = err instanceof Error ? err.message : String(err);
+    return { ok: false as const, message: "Upload error: " + msg };
+  }
 }
