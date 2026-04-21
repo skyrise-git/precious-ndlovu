@@ -44,6 +44,22 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   useEffect(() => {
+    const onStorage = (e: StorageEvent) => {
+      if (e.key !== STORAGE_KEY || e.newValue == null) return;
+      try {
+        const parsed = JSON.parse(e.newValue) as unknown;
+        if (parsed && typeof parsed === "object") {
+          setLines(parsed as CartLines);
+        }
+      } catch {
+        /* ignore */
+      }
+    };
+    window.addEventListener("storage", onStorage);
+    return () => window.removeEventListener("storage", onStorage);
+  }, []);
+
+  useEffect(() => {
     if (typeof window === "undefined") return;
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(lines));
