@@ -1,11 +1,12 @@
 import Image from "next/image";
-import { memberPackages, mediaSlots, type MediaSlotId } from "@/content/site";
+import { mediaSlots, type MediaSlotId, type MemberPackage } from "@/content/site";
+import { BuyNowButton } from "@/components/cart/BuyNowButton";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
-type Props = { media: Record<MediaSlotId, string> };
+type Props = { media: Record<MediaSlotId, string>; packages: MemberPackage[] };
 
-export function MemberPackages({ media }: Props) {
+export function MemberPackages({ media, packages }: Props) {
   return (
     <section id="packages" className="scroll-mt-20 py-20">
       <Container>
@@ -15,7 +16,7 @@ export function MemberPackages({ media }: Props) {
           subtitle="Pick the tier that fits and upgrade as you grow. Gold is recommended for full earning potential."
         />
         <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
-          {memberPackages.map((pkg, index) => {
+          {packages.map((pkg, index) => {
             const src = media[pkg.mediaSlot];
             const alt = mediaSlots[pkg.mediaSlot].alt;
             return (
@@ -60,6 +61,7 @@ export function MemberPackages({ media }: Props) {
                       <li key={h}>✓ {h}</li>
                     ))}
                   </ul>
+                  <BuyNowButton packageId={pkg.id} />
                 </div>
               </article>
             );

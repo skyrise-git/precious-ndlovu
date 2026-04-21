@@ -16,6 +16,7 @@ import {
   unilevelRepurchaseTotal,
   upgradeDifferentials,
 } from "@/content/compensation";
+import { getMemberPackages } from "@/lib/packages";
 import { CompensationDisclaimer } from "@/components/CompensationDisclaimer";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -34,7 +35,8 @@ function TableShell({ caption, children }: { caption: string; children: React.Re
   );
 }
 
-export function Compensation() {
+export async function Compensation() {
+  const memberPackages = await getMemberPackages();
   return (
     <section id="compensation" className="scroll-mt-20 border-t border-[#eadfe4] bg-[#fcf8f6] py-20">
       <Container>
@@ -47,7 +49,7 @@ export function Compensation() {
           {[
             ["Sponsor Bonus", "20%–35%"],
             ["Group Incentive", "Up to 10 Levels"],
-            ["Lifestyle Funds", "$350–$2,400"],
+            ["Lifestyle Funds", "Travel · Car · House"],
           ].map(([label, value]) => (
             <div key={label} className="rounded-xl border border-[#eadfe4] bg-white p-4">
               <p className="text-sm text-gray-500">{label}</p>
@@ -79,6 +81,22 @@ export function Compensation() {
 
           <Accordion title="2. Development Bonus">
             <p className="mb-4 text-gray-600">{developmentNote}</p>
+            <div className="mb-6">
+              <TableShell caption="Package volume (RV)">
+                <>
+                  <tr className="bg-[#fdf7f8]">
+                    <th className="px-4 py-3">Package</th>
+                    <th className="px-4 py-3">RV</th>
+                  </tr>
+                  {memberPackages.map((row) => (
+                    <tr key={row.id}>
+                      <td className="px-4 py-2">{row.name}</td>
+                      <td className="px-4 py-2 font-semibold text-[var(--accent)]">{row.rv}</td>
+                    </tr>
+                  ))}
+                </>
+              </TableShell>
+            </div>
             <TableShell caption="Development caps">
               <>
                 <tr className="bg-[#fdf7f8]">
@@ -184,14 +202,12 @@ export function Compensation() {
               <>
                 <tr className="bg-[#fdf7f8]">
                   <th className="px-4 py-3">Fund</th>
-                  <th className="px-4 py-3">Requirement</th>
-                  <th className="px-4 py-3">Reward</th>
+                  <th className="px-4 py-3">Groups / thresholds</th>
                 </tr>
                 {lifestyleFunds.map((row) => (
                   <tr key={row.name}>
                     <td className="px-4 py-2">{row.name}</td>
-                    <td className="px-4 py-2">{row.requirement}</td>
-                    <td className="px-4 py-2 font-semibold text-[var(--accent)]">{row.reward}</td>
+                    <td className="px-4 py-2">{row.detail}</td>
                   </tr>
                 ))}
               </>
@@ -199,7 +215,7 @@ export function Compensation() {
           </Accordion>
 
           <Accordion title="8. Rank Incentive">
-            <p className="mb-4 text-gray-600">{rankNotes}</p>
+            {rankNotes.trim() ? <p className="mb-4 text-gray-600">{rankNotes}</p> : null}
             <TableShell caption="Rank milestones">
               <>
                 <tr className="bg-[#fdf7f8]">

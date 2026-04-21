@@ -17,6 +17,7 @@ import { QuoteSection } from "@/components/sections/QuoteSection";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { mediaSlots } from "@/content/site";
 import { resolveMediaMap } from "@/lib/media";
+import { getMemberPackages } from "@/lib/packages";
 import { getSiteSettings } from "@/lib/settings";
 import { getEvents } from "@/lib/events";
 
@@ -26,6 +27,7 @@ export default async function Home() {
   const media = await resolveMediaMap();
   const settings = await getSiteSettings();
   const events = await getEvents();
+  const packages = await getMemberPackages();
 
   return (
     <>
@@ -38,7 +40,7 @@ export default async function Home() {
         <AboutGallery media={media} />
         <QuoteSection />
         <Pillars />
-        <MemberPackages media={media} />
+        <MemberPackages media={media} packages={packages} />
         <Compensation />
         <Testimonials />
         <Events events={events} />

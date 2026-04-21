@@ -101,19 +101,16 @@ export const upgradeDifferentials: {
 
 export const lifestyleFunds = [
   {
-    name: "Travel Fund",
-    requirement: "2,000 RV × 3 groups",
-    reward: "$350 (up to 3× per year)",
+    name: "Travel",
+    detail: "$2,000 × 3 groups",
   },
   {
-    name: "Car Fund",
-    requirement: "6,000 RV × 3 groups",
-    reward: "$900",
+    name: "Car",
+    detail: "$6,000 × 3 groups",
   },
   {
-    name: "House Fund",
-    requirement: "12,000 + 12,000 + 12,000 + 6,000 + 6,000 RV",
-    reward: "$2,400",
+    name: "House",
+    detail: "$12,000 + $12,000 + $12,000 + $6,000 + $6,000",
   },
 ] as const;
 
@@ -159,5 +156,4 @@ export const rankIncentives = [
   },
 ] as const;
 
-export const rankNotes =
-  "Requires minimum 150 RV/month repurchase. Payment within 60 days of verification (per plan).";
+export const rankNotes = "";

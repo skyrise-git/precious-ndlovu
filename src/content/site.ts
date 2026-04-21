@@ -170,35 +170,91 @@ export const mediaSlots: Record<
   },
 };
 
-export const memberPackages = [
+export type PackageId = "revookit" | "starter" | "bronze" | "silver" | "gold";
+
+/** Image slot for each package card — change only via code if you add new tiers. */
+export type PackageMediaSlot =
+  | "packageRevookit"
+  | "packageStarter"
+  | "packageBronze"
+  | "packageSilver"
+  | "packageGold";
+
+export type MemberPackage = {
+  id: PackageId;
+  code: string;
+  name: string;
+  rv: number;
+  products: string[];
+  upgradeWindow: string;
+  highlights: string[];
+  mediaSlot: PackageMediaSlot;
+  recommended: boolean;
+};
+
+/** Default packages (used when nothing is stored in the database yet). */
+export const defaultMemberPackages: MemberPackage[] = [
   {
-    id: "revookit", code: "01", name: "REVOOKIT", rv: 25,
-    products: ["1× Miira-Phyll"], upgradeWindow: "30 days",
+    id: "revookit",
+    code: "01",
+    name: "REVOOKIT",
+    rv: 25,
+    products: ["1× Miira-Phyll"],
+    upgradeWindow: "30 days",
     highlights: ["Entry-level starting point"],
-    mediaSlot: "packageRevookit" as const, recommended: false,
+    mediaSlot: "packageRevookit",
+    recommended: false,
   },
   {
-    id: "starter", code: "02", name: "STARTER", rv: 50,
-    products: ["1× Miira-Cell+", "1× Miiralife"], upgradeWindow: "30 days",
+    id: "starter",
+    code: "02",
+    name: "STARTER",
+    rv: 50,
+    products: ["Miira Cell / Miira Life"],
+    upgradeWindow: "30 days",
     highlights: ["Group Incentive up to 5 levels", "Sponsor Bonus up to 30%"],
-    mediaSlot: "packageStarter" as const, recommended: false,
+    mediaSlot: "packageStarter",
+    recommended: false,
   },
   {
-    id: "bronze", code: "03", name: "BRONZE", rv: 100,
-    products: ["1× Miira-Cell+", "1× Miiralife (2 boxes)"], upgradeWindow: "50 days",
+    id: "bronze",
+    code: "03",
+    name: "BRONZE",
+    rv: 100,
+    products: ["2× Miira Cell / 2× Miira Life"],
+    upgradeWindow: "30 days",
     highlights: ["Group Incentive up to 6 levels", "Sponsor Bonus up to 30%"],
-    mediaSlot: "packageBronze" as const, recommended: false,
+    mediaSlot: "packageBronze",
+    recommended: false,
   },
   {
-    id: "silver", code: "04", name: "SILVER", rv: 500,
-    products: ["5× Miira-Cell+", "5× Miiralife (10 boxes)"], upgradeWindow: "Unlimited",
-    highlights: ["Group Incentive up to 8 levels", "Sponsor Bonus up to 30%", "Dev Bonus capped at 2,500 RV/day"],
-    mediaSlot: "packageSilver" as const, recommended: false,
+    id: "silver",
+    code: "04",
+    name: "SILVER",
+    rv: 500,
+    products: ["10× Miira Cell / 10× Miira Life"],
+    upgradeWindow: "30 days",
+    highlights: [
+      "Group Incentive up to 8 levels",
+      "Sponsor Bonus up to 30%",
+      "Dev Bonus capped at 2,500 RV/day",
+    ],
+    mediaSlot: "packageSilver",
+    recommended: false,
   },
   {
-    id: "gold", code: "05", name: "GOLD", rv: 1000,
-    products: ["10× Miira-Cell+", "10× Miiralife (20 boxes)"], upgradeWindow: "Unlimited",
-    highlights: ["Group Incentive up to 10 levels", "Sponsor Bonus up to 35%", "Unlimited Development Bonus"],
-    mediaSlot: "packageGold" as const, recommended: true,
+    id: "gold",
+    code: "05",
+    name: "GOLD",
+    rv: 1000,
+    products: ["20× Miira Cell / 20× Miira Life"],
+    upgradeWindow: "Unlimited",
+    highlights: [
+      "Group Incentive up to 10 levels",
+      "Sponsor Bonus up to 35%",
+      "Unlimited Development Bonus",
+    ],
+    mediaSlot: "packageGold",
+    recommended: true,
   },
-] as const;
+];

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { DM_Sans, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { site } from "@/content/site";
+import { CartProvider } from "@/components/cart/CartProvider";
 
 function metadataBaseUrl(): URL {
   const raw = process.env.NEXT_PUBLIC_SITE_URL?.trim();
@@ -49,7 +50,7 @@ export default function RootLayout({
       <body
         className={`${display.variable} ${sans.variable} min-h-screen font-sans text-foreground antialiased`}
       >
-        {children}
+        <CartProvider>{children}</CartProvider>
       </body>
     </html>
   );
