@@ -12,7 +12,7 @@ function SubmitButton() {
       disabled={pending}
       className="w-full rounded-full bg-[var(--accent)] py-4 text-sm font-black uppercase tracking-widest text-white shadow-lg transition hover:bg-[var(--accent-hover)] disabled:opacity-60"
     >
-      {pending ? "Submitting..." : "Yes, I'm ready to join"}
+      {pending ? "Submitting..." : "Contact me"}
     </button>
   );
 }
@@ -41,7 +41,7 @@ export function LeadForm() {
       <Container>
         <div className="mx-auto max-w-3xl">
           <div className="mb-10 text-center">
-            <p className="text-sm font-bold uppercase tracking-[0.2em] text-[var(--accent)]">Get started</p>
+            <p className="text-sm font-bold uppercase tracking-[0.2em] text-[var(--accent)]">Contact me</p>
             <h2 className="mt-2 font-display text-3xl font-black uppercase leading-tight text-gray-900 sm:text-4xl">
               Let me help you get started
             </h2>
