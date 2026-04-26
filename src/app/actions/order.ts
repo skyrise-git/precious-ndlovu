@@ -1,5 +1,6 @@
 "use server";
 
+import { redirect } from "next/navigation";
 import { z } from "zod";
 import type { MemberPackage } from "@/content/site";
 import { getMemberPackages } from "@/lib/packages";
@@ -26,7 +27,6 @@ const schema = z.object({
 });
 
 export type OrderState =
-  | { ok: true; message: string; orderId: string }
   | { ok: false; message: string; fieldErrors?: Record<string, string[]> }
   | null;
 
@@ -167,9 +167,5 @@ export async function submitOrder(
     console.info("[order] (no RESEND) New order:", order.id, body);
   }
 
-  return {
-    ok: true,
-    message: "Thank you! Your order is placed. Pay cash on delivery when your package arrives.",
-    orderId: order.id,
-  };
+  redirect(`/order/confirmation?orderId=${encodeURIComponent(order.id)}`);
 }

@@ -1,7 +1,6 @@
 "use client";
 
-import Link from "next/link";
-import { useActionState, useEffect, useMemo } from "react";
+import { useActionState, useMemo } from "react";
 import { submitOrder, type OrderState } from "@/app/actions/order";
 import { useCart } from "@/components/cart/CartProvider";
 
@@ -15,7 +14,7 @@ function fieldError(
 }
 
 export function ShopCheckoutForm() {
-  const { lines, clearCart } = useCart();
+  const { lines } = useCart();
   const [state, formAction, pending] = useActionState(submitOrder, initial);
 
   const linesJson = useMemo(() => {
@@ -25,30 +24,7 @@ export function ShopCheckoutForm() {
     return JSON.stringify(arr);
   }, [lines]);
 
-  useEffect(() => {
-    if (state?.ok) {
-      clearCart();
-    }
-  }, [state, clearCart]);
-
   const hasLines = Object.keys(lines).some((id) => (lines[id] ?? 0) > 0);
-
-  if (state?.ok) {
-    return (
-      <div className="rounded-2xl border border-[#eadfe4] bg-white p-8 shadow-sm">
-        <p className="font-display text-xl font-bold text-[var(--accent)]">{state.message}</p>
-        <p className="mt-2 text-sm text-gray-600">
-          Reference: <span className="font-mono text-gray-800">{state.orderId}</span>
-        </p>
-        <Link
-          href="/"
-          className="mt-6 inline-block rounded-full border border-[var(--accent)] px-6 py-2 text-sm font-bold uppercase tracking-wider text-[var(--accent)] transition hover:bg-[var(--accent)] hover:text-white"
-        >
-          Back to home
-        </Link>
-      </div>
-    );
-  }
 
   return (
     <form action={formAction} className="space-y-6 rounded-2xl border border-[#eadfe4] bg-white p-6 shadow-sm md:p-8">
