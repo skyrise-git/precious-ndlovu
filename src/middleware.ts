@@ -5,7 +5,28 @@ import { authSecretKey } from "@/lib/auth-secret";
 
 const COOKIE = "admin_session";
 
+function isLocalhost(host: string) {
+  const h = host.split(":")[0] ?? host;
+  return h === "localhost" || h === "127.0.0.1" || h === "[::1]";
+}
+
+function forceHttpsIfNeeded(request: NextRequest) {
+  const host = request.headers.get("host") ?? "";
+  const proto = request.headers.get("x-forwarded-proto");
+  if (proto === "http" && !isLocalhost(host)) {
+    const url = request.nextUrl.clone();
+    url.protocol = "https:";
+    return NextResponse.redirect(url, 308);
+  }
+  return null;
+}
+
 export async function middleware(request: NextRequest) {
+  const httpsRedirect = forceHttpsIfNeeded(request);
+  if (httpsRedirect) {
+    return httpsRedirect;
+  }
+
   const { pathname } = request.nextUrl;
   if (!pathname.startsWith("/admin")) {
     return NextResponse.next();
@@ -16,10 +37,7 @@ export async function middleware(request: NextRequest) {
 
   const key = authSecretKey();
   if (!key) {
-    return new NextResponse(
-      "Server misconfiguration: set AUTH_SECRET (16+ characters).",
-      { status: 500 },
-    );
+    return new NextResponse("Server misconfiguration: set AUTH_SECRET (16+ characters).", { status: 500 });
   }
 
   const token = request.cookies.get(COOKIE)?.value;
@@ -36,5 +54,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin/:path*"],
+  matcher: ["/((?!_next/static|_next/image|favicon.ico|.*\\..*).*)"],
 };

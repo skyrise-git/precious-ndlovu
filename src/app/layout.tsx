@@ -8,7 +8,17 @@ function metadataBaseUrl(): URL {
   const raw = process.env.NEXT_PUBLIC_SITE_URL?.trim();
   if (!raw) return new URL("https://localhost");
   try {
-    return new URL(raw);
+    const u = new URL(raw);
+    // Avoid `http://` in production: canonical / OG break when only HTTPS works (e.g. Vercel + mis-set env).
+    if (
+      u.protocol === "http:" &&
+      u.hostname !== "localhost" &&
+      u.hostname !== "127.0.0.1" &&
+      u.hostname !== "[::1]"
+    ) {
+      u.protocol = "https:";
+    }
+    return u;
   } catch {
     return new URL("https://localhost");
   }
