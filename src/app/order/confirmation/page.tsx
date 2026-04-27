@@ -73,8 +73,8 @@ export default async function OrderConfirmationPage({ searchParams }: Props) {
                 </p>
               </div>
 
-              <div className="animate-fade-up-delay-2 relative mx-auto mt-12 max-w-lg">
-                <div className="absolute -inset-px rounded-[1.4rem] bg-gradient-to-br from-white via-[#f8f0f2] to-[#eddee2] p-px shadow-xl shadow-[#2a0f16]/5">
+              <div className="animate-fade-up-delay-2 mx-auto mt-12 max-w-lg">
+                <div className="rounded-[1.4rem] bg-gradient-to-br from-white via-[#f8f0f2] to-[#eddee2] p-px shadow-xl shadow-[#2a0f16]/5">
                   <div className="overflow-hidden rounded-[1.35rem] border border-white/60 bg-white/90 backdrop-blur-sm">
                     <div className="bg-gradient-to-r from-[#fdf7f8] to-white px-6 py-5 text-left sm:px-8 sm:py-6">
                       <p className="text-xs font-bold uppercase tracking-widest text-gray-400">Order number</p>
