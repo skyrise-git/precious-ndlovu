@@ -1,6 +1,7 @@
 "use client";
 
 import { useFormState, useFormStatus } from "react-dom";
+import { FaWhatsapp } from "react-icons/fa";
 import { submitContact } from "@/app/actions/contact";
 import { Container } from "@/components/ui/Container";
 
@@ -33,7 +34,9 @@ const investmentOptions = ["R1,250", "R2,160", "R10,800", "R21,600 and more"];
 const startOptions = ["Today", "Next week", "This month"];
 const experienceOptions = ["Yes I have done it before", "No but I would love to learn"];
 
-export function LeadForm() {
+type LeadFormProps = { whatsappUrl?: string | null };
+
+export function LeadForm({ whatsappUrl }: LeadFormProps) {
   const [state, formAction] = useFormState(submitContact, null);
 
   return (
@@ -48,6 +51,19 @@ export function LeadForm() {
             <p className="mx-auto mt-3 max-w-2xl text-base leading-relaxed text-gray-600">
               Complete this intake form and I will guide your next step personally.
             </p>
+            {whatsappUrl ? (
+              <p className="mt-4 text-center text-sm text-gray-600">
+                <a
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 font-bold text-[#128C7E] transition hover:text-[#075E54] hover:underline"
+                >
+                  <FaWhatsapp className="h-5 w-5 text-[#25D366]" aria-hidden />
+                  Message on WhatsApp instead
+                </a>
+              </p>
+            ) : null}
             <div className="mt-5 flex flex-wrap justify-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-gray-500">
               <span className="rounded-full border border-[#eadfe4] bg-white px-3 py-1">Personal details</span>
               <span className="rounded-full border border-[#eadfe4] bg-white px-3 py-1">Goals</span>

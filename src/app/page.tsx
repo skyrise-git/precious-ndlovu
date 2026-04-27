@@ -19,6 +19,7 @@ import { mediaSlots } from "@/content/site";
 import { resolveMediaMap } from "@/lib/media";
 import { getMemberPackages } from "@/lib/packages";
 import { getSiteSettings } from "@/lib/settings";
+import { getWhatsappChatUrlFromSettings } from "@/lib/whatsapp";
 import { getEvents } from "@/lib/events";
 
 export const dynamic = "force-dynamic";
@@ -26,6 +27,7 @@ export const dynamic = "force-dynamic";
 export default async function Home() {
   const media = await resolveMediaMap();
   const settings = await getSiteSettings();
+  const whatsappUrl = getWhatsappChatUrlFromSettings(settings);
   const events = await getEvents();
   const packages = await getMemberPackages();
 
@@ -45,7 +47,7 @@ export default async function Home() {
         <Testimonials />
         <Events events={events} />
         <FinalCta />
-        <LeadForm />
+        <LeadForm whatsappUrl={whatsappUrl} />
       </main>
       <Footer settings={settings} />
       <MobileCta />

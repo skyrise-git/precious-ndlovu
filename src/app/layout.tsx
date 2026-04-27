@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { DM_Sans, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { site } from "@/content/site";
+import { Suspense } from "react";
 import { CartProvider } from "@/components/cart/CartProvider";
+import { WhatsappFromSettings } from "@/components/WhatsappFromSettings";
 
 function metadataBaseUrl(): URL {
   const raw = process.env.NEXT_PUBLIC_SITE_URL?.trim();
@@ -60,7 +62,12 @@ export default function RootLayout({
       <body
         className={`${display.variable} ${sans.variable} min-h-screen font-sans text-foreground antialiased`}
       >
-        <CartProvider>{children}</CartProvider>
+        <CartProvider>
+          {children}
+          <Suspense fallback={null}>
+            <WhatsappFromSettings />
+          </Suspense>
+        </CartProvider>
       </body>
     </html>
   );
