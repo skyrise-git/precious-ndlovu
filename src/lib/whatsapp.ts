@@ -2,8 +2,14 @@
  * Build https://wa.me/ links. Number must be digits only (no +), including country code.
  * @see https://faq.whatsapp.com/1317564962215847
  */
-const DEFAULT_FIRST_MESSAGE =
-  "Hi Precious, I found you on your website and I would like to get in touch.";
+const FALLBACK_FIRST_MESSAGE =
+  "Hi Precious, I visited your website and would like to learn more about your offerings.";
+
+function defaultFirstMessage(): string {
+  const fromEnv = process.env.NEXT_PUBLIC_WHATSAPP_MESSAGE?.trim();
+  if (fromEnv) return fromEnv;
+  return FALLBACK_FIRST_MESSAGE;
+}
 
 function isLikelyPlaceholder(digits: string): boolean {
   if (digits.length < 8) return true;
@@ -27,7 +33,7 @@ export function resolveWhatsappE164FromPhone(phone: string): string | null {
 
 export function buildWhatsappUrl(
   e164: string,
-  firstMessage: string = DEFAULT_FIRST_MESSAGE,
+  firstMessage: string = defaultFirstMessage(),
 ): string {
   const q = firstMessage.trim()
     ? `?text=${encodeURIComponent(firstMessage.trim())}`

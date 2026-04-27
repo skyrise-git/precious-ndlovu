@@ -76,7 +76,7 @@ export const site = {
     tiktok: "https://tiktok.com",
   },
   contactInfo: {
-    phone: "+27 00 000 0000",
+    phone: "+27 83 411 1626",
     email: "info@preciousndlovu.com",
   },
   finalCta: {
